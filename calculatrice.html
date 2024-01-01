@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>3
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5dced;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #101011;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #911f5e;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #796b6b;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #d85e97;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #a265e9;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>BIENVENU! </h2>
+        
+      <h2>Dans cette Calculatrice, nous vous demandons juste de nous donner deux valeurs et a partir de ces valeurs, nous calculerons la somme, la multiplication,la soustraction et la division des ces deux nombres.</h2>
+
+    <form id="calculatorForm">
+        <label for="num1">Nombre 1:</label>
+        <input type="text" id="num1" name="num1" required pattern="[0-9]+">
+
+        <label for="num2">Nombre 2:</label>
+        <input type="text" id="num2" name="num2" required pattern="[0-9]+" oninput="validateInput()">
+
+        <button type="button" onclick="calculate()">Calculer</button>
+    </form>
+
+    <h3>Résultats :</h3>
+    <p id="sumResult">  Somme  : </p>
+    <p id="productResult">  Multiplication  : </p>
+    <p id="divisionResult"> Division : </p>
+    <p id="subtractionResult"> Soustraction : </p>
+
+    <script>
+        function validateInput() {
+            const num2Input = document.getElementById('num2');
+            const num2Value = num2Input.value;
+
+            // Vérifier si la valeur est un nombre et éviter la division par 0
+            if (!isNaN(num2Value) && parseFloat(num2Value) !== 0) {
+                num2Input.setCustomValidity('');
+            } else {
+                num2Input.setCustomValidity('Le deuxième nombre doit être différent de zéro.');
+            }
+        }
+
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('sumResult').textContent = 'La Somme  est :  '+ (num1 + num2);
+                document.getElementById('productResult').textContent = 'La multiplication est: ' + (num1 * num2);
+                document.getElementById('divisionResult').textContent = 'La division est : ' + (num1 / num2);
+                document.getElementById('subtractionResult').textContent = 'La soustraction est: ' + (num1 - num2);
+            } else {
+                alert('Veuillez saisir des nombres valides.');
+            }
+        }
+    </script>
+
+</body>
+</html>
